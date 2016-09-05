@@ -1,27 +1,28 @@
 package argaaya.helloprocessing;
 
-/**
- * Created by Maria on 2016-08-28.
- */
 import processing.core.PApplet;
 
-public class ParticleSystemManager extends PApplet {
+public class ParticleSystemManager {
 
-    ParticleSystem pSys;
+    PApplet m_p;
+    ParticleSystem m_pSys;
 
-    public void settings () {
-        size (1000, 1000);
+    public ParticleSystemManager (PApplet pApplet){       //TODO: naming
+        m_p = pApplet;
+        m_pSys = new ParticleSystem(m_p);
     }
 
-    public void setup () {
-        pSys = new ParticleSystem(this);
-        pSys.setup();
+    public void update() {
+        m_pSys.update();
+
+        if (m_p.mousePressed){
+            m_pSys.create(m_p.mouseX, m_p.mouseY);
+            m_p.mousePressed = false;
+        }
     }
 
     public void draw() {
-        background(155, 58, 58);
-        pSys.update();
-        pSys.draw ();
+        m_pSys.draw ();
     }
 }
 

@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         /*--- new ---*/
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = new ParticleSystemManager();
+        Fragment fragment = new App();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();

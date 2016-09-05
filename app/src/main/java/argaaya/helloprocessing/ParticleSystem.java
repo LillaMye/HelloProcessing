@@ -2,41 +2,31 @@ package argaaya.helloprocessing;
 
 import processing.core.PApplet;
 
-/**
- * Created by Maria on 2016-09-04.
- */
 public class ParticleSystem {
 
-    Particle[]             p = new Particle[100];
-    ParticleSystemManager  Parent;
-    int                    i, currentParticle = 0;
+    Particle[] m_particles = new Particle[100];
+    PApplet    m_p;
+    int        m_nofParticles;
 
-    public ParticleSystem (ParticleSystemManager particleSystemManager){
-        Parent = particleSystemManager;
+    public ParticleSystem (PApplet pApplet){
+        m_p = pApplet;
+        m_nofParticles = 0;
     }
 
-    public void settings () {
-    }
-
-    public void setup() {
-        p[currentParticle] = new Particle(Parent, 50, 500, 50, 1, 1, 1, 1);
-        currentParticle++;
+    public void create (int x, int y){
+        m_particles[m_nofParticles] = new Particle(m_p,x,y,50,2,2);
+        m_nofParticles++;
     }
 
     public void update () {
-        for (i = 0; i < currentParticle; i++){
-            p[i].update ();
+        if (m_nofParticles > 0) {
+            m_particles[0].update();
         }
     }
-    public void draw() {
-        if (Parent.mousePressed){
-            p[currentParticle] = new Particle(Parent, Parent.mouseX, Parent.mouseY, 10, (float)0.1, (float)0.1, (float)0.1, (float)0.1);
-            currentParticle++;
-            Parent.mousePressed = false;
-        }
 
-        for (i = 0; i < currentParticle; i++){
-            p[i].draw ();
+    public void draw() {
+        if (m_nofParticles > 0) {
+            m_particles[0].draw();
         }
     }
 }
