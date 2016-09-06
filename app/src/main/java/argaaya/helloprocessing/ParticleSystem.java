@@ -1,32 +1,31 @@
 package argaaya.helloprocessing;
 
+import java.util.LinkedList;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class ParticleSystem {
 
-    Particle[] m_particles = new Particle[100];
+    LinkedList<Particle> m_particles = new LinkedList<Particle>();
     PApplet    m_p;
-    int        m_nofParticles;
 
     public ParticleSystem (PApplet pApplet){
-        m_p = pApplet;
-        m_nofParticles = 0;
+        m_p            = pApplet;
     }
 
-    public void create (int x, int y){
-        m_particles[m_nofParticles] = new Particle(m_p,x,y,50,2,2);
-        m_nofParticles++;
+    public void create (PVector size, PVector position, PVector velocity, PVector acceleration){
+        m_particles.add(new Particle(m_p, size, position, velocity, acceleration));
     }
 
     public void update () {
-        if (m_nofParticles > 0) {
-            m_particles[0].update();
+        for (Particle P : m_particles){
+            P.update();
         }
     }
 
     public void draw() {
-        if (m_nofParticles > 0) {
-            m_particles[0].draw();
+        for (Particle P : m_particles){
+            P.draw();
         }
     }
 }

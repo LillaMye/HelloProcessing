@@ -18,6 +18,6 @@ public class App extends PApplet{
     public void draw() {
         background(155, 58, 58);
         m_pMan.update();
-        m_pMan.draw ();
+        m_pMan.draw();
     }
 }
