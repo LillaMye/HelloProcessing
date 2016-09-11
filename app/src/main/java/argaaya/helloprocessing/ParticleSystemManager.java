@@ -1,10 +1,10 @@
 package argaaya.helloprocessing;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Random;
 
 import processing.core.PApplet;
-import processing.core.PVector;
 
 public class ParticleSystemManager {
 
@@ -20,18 +20,23 @@ public class ParticleSystemManager {
     }
 
     public void update() {
-        for (ParticleSystem P : m_pSys) {
-            P.update();
+
+        ListIterator<ParticleSystem> pSysItr = m_pSys.listIterator();
+
+        while (pSysItr.hasNext()){
+            ParticleSystem curr_pSys = pSysItr.next();
+
+            if (curr_pSys.isDead()){
+                pSysItr.remove();
+            } else{
+                curr_pSys.update();
+            }
         }
     }
 
     public void draw() {
         for (ParticleSystem P : m_pSys) {
-            if (P.isDead()) {
-                //TODO
-            } else {
-                P.draw();
-            }
+            P.draw();
         }
     }
 }

@@ -24,16 +24,13 @@ public class Particle {
     }
 
     public boolean isDead () {
-        if (m_position.x < 0 || m_position.x > m_p.width || m_position.y < 0 || m_position.y > m_p.height) {
-            return false;
-        } else {
-            return false;
-        }
+        return (m_position.x < 0 || m_position.x > m_p.width || m_position.y < 0 || m_position.y > m_p.height);
     }
 
     public void update() {
         m_position.add(m_velocity);
         m_velocity.add(m_acceleration);
+
 
         /*
         // change direction at border

@@ -1,5 +1,6 @@
 package argaaya.helloprocessing;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 import processing.core.PApplet;
@@ -10,21 +11,42 @@ import processing.core.PVector;
  */
 public class AllAtOnceEmitter extends Emitter {
 
-    Random m_rnd = new Random();
+    static float PI = 3.14159265358979323846F;
 
-    AllAtOnceEmitter (PApplet pApplet, ParticleSystem pSys, int nofParticles, PVector position, int minVelocity, int maxVelocity){
+    PApplet m_p            = new PApplet();
+    Random  m_rnd          = new Random();
+    PVector m_velocity     = new PVector();
+    PVector m_size         = new PVector();
+    PVector m_acceleration = new PVector();
+    PVector m_position     = new PVector();
+    boolean m_isDead       = false;
+    int     m_nofParticles;
+    int     m_minVelocity, m_maxVelocity;
 
-        for (int i = 0; i < nofParticles; i++){
-            PVector velocity     = new PVector((m_rnd.nextInt(201)-100),(m_rnd.nextInt(201)-100));
-            PVector size         = new PVector(15,15);
-            PVector acceleration = new PVector(0,0);
+    LinkedList<Particle> m_particles = new LinkedList<Particle>();
 
-            velocity.setMag(m_rnd.nextInt(1+maxVelocity-minVelocity) + minVelocity + m_rnd.nextFloat());
-            pSys.addParticle(new Particle(pApplet, size, position, velocity, acceleration));
-        }
+    AllAtOnceEmitter (PApplet pApplet, int nofParticles, PVector position, int minVelocity, int maxVelocity){
+        m_p            = pApplet;
+        m_nofParticles = nofParticles;
+        m_position.set(position);
+        m_minVelocity = minVelocity;
+        m_maxVelocity = maxVelocity;
+
     }
 
-    public void update (){}
+    public LinkedList<Particle> update (){
 
-    public boolean isDead () { return true; }
+        m_size.set(15,15);
+        m_acceleration.set(0,0);
+
+        for (int i = 0; i < m_nofParticles; i++){
+            m_velocity.set(getRandomVelocity(m_minVelocity, m_maxVelocity));
+            m_particles.add(new Particle(m_p, m_size, m_position, m_velocity, m_acceleration));
+        }
+
+        m_isDead = true;
+        return m_particles;
+    }
+
+    public boolean isDead () { return m_isDead; }
 }

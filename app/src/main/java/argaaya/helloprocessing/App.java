@@ -32,10 +32,10 @@ public class App extends PApplet{
             m_position.set(mouseX, mouseY);
 
             m_pSys    = new ParticleSystem(this);
-            m_emitter = new AllAtOnceEmitter(this, m_pSys, 200, m_position, 2, 8);
+            m_emitter = new AllAtOnceEmitter(this, 200, m_position, 2, 8);
 
-            m_pSys.addEmitter(m_emitter);
             m_pMan.addParticleSystem(m_pSys);
+            m_pSys.addEmitter(m_emitter);
 
             mousePressed = false;
         }
