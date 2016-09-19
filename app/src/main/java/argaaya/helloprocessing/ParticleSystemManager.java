@@ -2,7 +2,6 @@ package argaaya.helloprocessing;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.Random;
 
 import processing.core.PApplet;
 
@@ -35,9 +34,12 @@ public class ParticleSystemManager {
     }
 
     public void draw() {
+
+        m_p.beginShape(m_p.QUADS);
         for (ParticleSystem P : m_pSys) {
             P.draw();
         }
+        m_p.endShape();
     }
 }
 

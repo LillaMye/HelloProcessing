@@ -1,9 +1,9 @@
 package argaaya.helloprocessing;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 /**
@@ -11,37 +11,45 @@ import processing.core.PVector;
  */
 public class AllAtOnceEmitter extends Emitter {
 
-    static float PI = 3.14159265358979323846F;
-
-    PApplet m_p            = new PApplet();
-    Random  m_rnd          = new Random();
-    PVector m_velocity     = new PVector();
-    PVector m_size         = new PVector();
-    PVector m_acceleration = new PVector();
-    PVector m_position     = new PVector();
-    boolean m_isDead       = false;
+    PApplet m_p;
+    PVector m_position;
     int     m_nofParticles;
-    int     m_minVelocity, m_maxVelocity;
+    float   m_minVelocity, m_maxVelocity;
+    boolean m_isDead = false;
 
     LinkedList<Particle> m_particles = new LinkedList<Particle>();
+    LinkedList<Modifier> m_modifiers = new LinkedList<Modifier>();
 
-    AllAtOnceEmitter (PApplet pApplet, int nofParticles, PVector position, int minVelocity, int maxVelocity){
+    PImage m_image;
+
+    AllAtOnceEmitter (PApplet pApplet, LinkedList<Modifier> modifiers, PImage image, int nofParticles, PVector position, float minVelocity, float maxVelocity){
         m_p            = pApplet;
         m_nofParticles = nofParticles;
-        m_position.set(position);
-        m_minVelocity = minVelocity;
-        m_maxVelocity = maxVelocity;
+        m_minVelocity  = minVelocity;
+        m_maxVelocity  = maxVelocity;
+        m_position     = new PVector(position.x, position.y);
+        m_image        = image;
 
+        m_modifiers.addAll(modifiers);
     }
 
     public LinkedList<Particle> update (){
 
-        m_size.set(15,15);
-        m_acceleration.set(0,0);
+        if (m_isDead){
+            return new LinkedList<Particle>();
+        }
 
-        for (int i = 0; i < m_nofParticles; i++){
-            m_velocity.set(getRandomVelocity(m_minVelocity, m_maxVelocity));
-            m_particles.add(new Particle(m_p, m_size, m_position, m_velocity, m_acceleration));
+        PVector size         = new PVector(18, 18);
+        PVector acceleration = new PVector(0.02F, 0.02F);
+        PVector velocity     = new PVector();
+
+        for (int i = 0; i < m_nofParticles; i++) {
+            velocity.set(getRandomVelocity(m_minVelocity, m_maxVelocity));
+            m_particles.add(new Particle(m_p, m_image, size, m_position, velocity, acceleration));
+        }
+
+        for (Modifier m : m_modifiers){
+            m.addParticles(m_particles);
         }
 
         m_isDead = true;

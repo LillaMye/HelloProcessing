@@ -11,18 +11,10 @@ public class ParticleSystem {
 
     LinkedList<Particle> m_particles = new LinkedList<Particle>();
     LinkedList<Emitter>  m_emitters  = new LinkedList<Emitter>();
-    PApplet    m_p;
+    LinkedList<Modifier> m_modifiers = new LinkedList<Modifier>();
 
-    public ParticleSystem (PApplet pApplet){
-        m_p = pApplet;
-    }
-
-    public void addParticle(Particle particle){
-        m_particles.add(particle);
-    }
-
-    public void addParticleList(LinkedList<Particle> particles){
-        m_particles.addAll(particles);
+    public void addModifiers(LinkedList<Modifier> modifiers){
+        m_modifiers.addAll(modifiers);
     }
 
     public void addEmitter (Emitter emitter) {
@@ -35,8 +27,11 @@ public class ParticleSystem {
 
     public void update () {
 
-        ListIterator<Particle> particleItr = m_particles.listIterator();
+        for (Modifier m : m_modifiers){
+            m.update();
+        }
 
+        ListIterator<Particle> particleItr = m_particles.listIterator();
         while(particleItr.hasNext()){
             Particle currParticle = particleItr.next();
 
@@ -48,14 +43,13 @@ public class ParticleSystem {
         }
 
         ListIterator<Emitter> emitterItr = m_emitters.listIterator();
-
         while (emitterItr.hasNext()){
             Emitter currEmitter = emitterItr.next();
 
+            m_particles.addAll(currEmitter.update());
+
             if (currEmitter.isDead()){
                 emitterItr.remove();
-            } else{
-                m_particles.addAll(currEmitter.update());
             }
         }
     }
