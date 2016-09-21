@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 public class ParticleSystem {
@@ -13,8 +14,16 @@ public class ParticleSystem {
     LinkedList<Emitter>  m_emitters  = new LinkedList<Emitter>();
     LinkedList<Modifier> m_modifiers = new LinkedList<Modifier>();
 
-    public void addModifiers(LinkedList<Modifier> modifiers){
-        m_modifiers.addAll(modifiers);
+    PApplet m_p;
+    PImage  m_image;
+
+    public ParticleSystem (PApplet pApplet, PImage image){
+        m_p     = pApplet;
+        m_image = image;
+    }
+
+    public void addModifier(Modifier modifier){
+        m_modifiers.add(modifier);
     }
 
     public void addEmitter (Emitter emitter) {
@@ -28,7 +37,7 @@ public class ParticleSystem {
     public void update () {
 
         for (Modifier m : m_modifiers){
-            m.update();
+            m.apply(m_particles);
         }
 
         ListIterator<Particle> particleItr = m_particles.listIterator();
@@ -55,6 +64,7 @@ public class ParticleSystem {
     }
 
     public void draw() {
+        m_p.texture(m_image);
         for (Particle P : m_particles){
             P.draw();
         }

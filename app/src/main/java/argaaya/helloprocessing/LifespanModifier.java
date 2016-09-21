@@ -1,5 +1,6 @@
 package argaaya.helloprocessing;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -7,20 +8,17 @@ import java.util.Random;
  */
 public class LifespanModifier extends Modifier {
 
-    int     m_lifespan;
-    boolean m_isUpdated = false;
+    float m_ageingRate;
 
-    public LifespanModifier (int lifespan){
-      m_lifespan = lifespan;
+    public LifespanModifier (float ageingRate){
+        m_ageingRate = ageingRate;
     }
 
-    public void update (){
-        if (!m_isUpdated) {
-            for (Particle P : m_particles) {
-                Random rnd = new Random();
-                P.setLifespan(m_lifespan + rnd.nextInt(m_lifespan / 5));
-                m_isUpdated = true;
-            }
+    public void apply (LinkedList<Particle> particles){
+
+        for (Particle p : particles) {
+            Random rnd = new Random();
+            p.setAge(p.getAge() + m_ageingRate);
         }
     }
 }

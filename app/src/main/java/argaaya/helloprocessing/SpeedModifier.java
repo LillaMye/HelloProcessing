@@ -1,5 +1,7 @@
 package argaaya.helloprocessing;
 
+import java.util.LinkedList;
+
 /**
  * Created by Maria on 2016-09-17.
  */
@@ -11,8 +13,8 @@ public class SpeedModifier extends Modifier {
         m_speed = change;
     }
 
-    public void update (){
-        for (Particle m : m_particles){
+    public void apply (LinkedList<Particle> particles){
+        for (Particle m : particles){
             m.updateSpeed (m_speed);
         }
     }

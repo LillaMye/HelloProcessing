@@ -54,7 +54,7 @@
         jar="C:\Users\Maria\Documents\GitHub\HelloProcessing\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="24.0.1"
-        sha1="a3af96c5e6100afc9dbeaeae96c32c7abf6c34cc">
+        sha1="0f84b4b5450d083e533b19da343291362287e3c4">
         <dex dex="C:\Users\Maria\Documents\GitHub\HelloProcessing\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_efe8b4633e99e3c01f714e99b34dcad0733674be\classes.dex" />
     </item>
     <item
@@ -124,7 +124,7 @@
         jar="C:\Users\Maria\Documents\GitHub\HelloProcessing\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         revision="24.0.1"
-        sha1="cfbde3ee7b3c55bc5e01e66d276f2dc513bfb4d8">
+        sha1="7b48d4f020c90b0933ac3248ac703e4363253315">
         <dex dex="C:\Users\Maria\Documents\GitHub\HelloProcessing\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f71e5a85dc48d5bd891f9c00111a86d6d355b717\classes.dex" />
     </item>
 

@@ -11,12 +11,8 @@ public class App extends PApplet{
 
     ParticleSystemManager m_pMan;
     ParticleSystem        m_pSys;
-    LinkedList<Modifier>  m_modifiers = new LinkedList<Modifier>();
-    AllAtOnceEmitter      m_emitter;
     PVector               m_position = new PVector();
     PImage                m_image;
-
-    static int i;
 
     public void settings () {
         fullScreen(P2D);
@@ -30,25 +26,20 @@ public class App extends PApplet{
 
     @Override
     public void mouseDragged() {
-        m_position.set(mouseX, mouseY);
 
-        m_modifiers.clear();
-        m_modifiers.add(new LifespanModifier(40+i));
-        m_modifiers.add(new SpeedModifier(-0.03F));
-        m_modifiers.add(new ColorModifier(0, 5 - i/50, 3.5F - i/50));
-        m_emitter = new AllAtOnceEmitter(this, m_modifiers, m_image, 30, m_position, 0.1F, 5F);
-
-        m_pSys = new ParticleSystem();
-        m_pMan.addParticleSystem(m_pSys);
-        m_pSys.addEmitter(m_emitter);
-        m_pSys.addModifiers(m_modifiers);
-
-        i += 1;
     }
 
     @Override
     public void mousePressed() {
-        i = 0;
+        m_position.set(mouseX, mouseY);
+
+        m_pSys = new ParticleSystem(this, m_image);
+        m_pMan.addParticleSystem(m_pSys);
+
+        m_pSys.addModifier(new LifespanModifier(10));
+        m_pSys.addModifier(new SpeedModifier(-0.03F));
+        m_pSys.addModifier(new ColorModifier(0, 5, 3.5F, 5));
+        m_pSys.addEmitter(new AllAtOnceEmitter(this, 100, m_position, 0.1F, 5F));
     }
 
     public void draw() {
