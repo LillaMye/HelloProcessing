@@ -37,7 +37,7 @@ public class App extends PApplet{
         m_pSys.addModifier(new AgeModifier(3));
         m_pSys.addModifier(new DampingModifier(0.003F));
         m_pSys.addModifier(new ColorModifier(this, color(255,255,255,255), color(255,127,0,255),color(255,0,0,0), 0.7F));
-        m_pSys.addEmitter(new AllAtOnceEmitter(this, 100, m_position, 0.1F, 3F));
+        m_pSys.addEmitter(new AllAtOnceEmitter(this, 30, m_position, 0.1F, 3F));
     }
 
     public void draw() {
