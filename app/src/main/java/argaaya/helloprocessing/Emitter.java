@@ -3,6 +3,7 @@ package argaaya.helloprocessing;
 import java.util.LinkedList;
 import java.util.Random;
 
+import processing.core.PApplet;
 import processing.core.PVector;
 
 /**
@@ -10,9 +11,10 @@ import processing.core.PVector;
  */
 public class Emitter {
 
-    public boolean isDead () {
-        return true;
-    }
+    PApplet m_p;
+    boolean m_isDead = false;
+
+    public boolean isDead (){return true;}
 
     public LinkedList<Particle> update () {return null;}
 

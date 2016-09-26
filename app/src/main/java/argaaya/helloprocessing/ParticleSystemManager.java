@@ -5,14 +5,17 @@ import java.util.ListIterator;
 
 import processing.core.PApplet;
 
-public class ParticleSystemManager {
+public final class ParticleSystemManager {
+
+    private static final ParticleSystemManager instance = new ParticleSystemManager();
 
     PApplet        m_p;
     LinkedList<ParticleSystem> m_pSys = new LinkedList<ParticleSystem>();
 
-    public ParticleSystemManager (PApplet papplet){
-        m_p = papplet;
-    }
+    public static ParticleSystemManager getInstance () { return instance;}
+
+    public void providePapplet (PApplet papplet){m_p = papplet;}
+
 
     public void addParticleSystem (ParticleSystem pSys){
         m_pSys.add(pSys);

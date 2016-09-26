@@ -3,6 +3,7 @@ package argaaya.helloprocessing;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import android.graphics.Color;
 
 /**
  * Created by Maria on 2016-08-31.
@@ -11,40 +12,37 @@ public class Particle {
 
     private PApplet m_p;
 
-    private final PVector m_position;
-    private final PVector m_velocity;
-    private final PVector m_acceleration;
-    private final PVector m_size;
+    private final PVector m_position     = new PVector();
+    private final PVector m_velocity     = new PVector();
+    private final PVector m_acceleration = new PVector();
+    private final PVector m_size         = new PVector();
 
-    static float m_maxAge = 1000;
+    static int m_maxAge = 1000;
 
-    float    m_age;
-    float    m_colorR = 255, m_colorG = 255, m_colorB = 255;
+    int m_age;
+    int m_tint = 0xFFFFFFFF;
 
     public Particle(PApplet pApplet, PVector size, PVector position, PVector velocity, PVector acceleration) {
-        m_p            = pApplet;
-        m_position     = position.get();
-        m_velocity     = velocity.get();
-        m_acceleration = acceleration.get();
-        m_size         = size.get();
-        m_age          = 0;
+        m_p = pApplet;
+        m_position.set(position);
+        m_velocity.set(velocity);
+        m_acceleration.set(acceleration);
+        m_size.set(size);
+        m_age = 0;
     }
 
-    public void setAge (float age){
-        m_age = age;
-    }
-    public float getAge (){
-        return m_age;
-    }
-
-    public void updateSpeed (float change){
-        m_velocity.setMag(m_velocity.mag()+ change);
+    public int getAge() {return m_age;};
+    public int getMaxAge() {return m_maxAge;};
+    public void updateAge (float change){
+        m_age += change;
     }
 
-    public void setTint (float r, float g, float b){
-        m_colorR = r;
-        m_colorG = g;
-        m_colorB = b;
+    public PVector getVelocity(){ return m_velocity;};
+    public void    setVelocity(PVector velocity){m_velocity.set(velocity);}
+    public void    setAcceleration (PVector acceleration) {m_acceleration.set(acceleration);}
+
+    public void setTint (int color){
+        m_tint = color;
     }
 
     public boolean isDead () {
@@ -55,11 +53,11 @@ public class Particle {
 
     public void update() {
         m_position.add(m_velocity);
-        m_velocity.setMag(m_velocity.mag() + m_acceleration.mag());
+        m_velocity.add(m_acceleration);
     }
 
     public void draw() {
-        m_p.tint(m_colorR, m_colorG, m_colorB);
+        m_p.tint(m_tint);
         m_p.vertex(m_position.x - m_size.x/2, m_position.y - m_size.y/2, 0, 0);
         m_p.vertex(m_position.x - m_size.x/2, m_position.y + m_size.y/2, m_size.y, 0);
         m_p.vertex(m_position.x + m_size.x/2, m_position.y + m_size.y/2, m_size.y, m_size.x);

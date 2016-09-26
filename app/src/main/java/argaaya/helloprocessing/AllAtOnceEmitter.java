@@ -11,11 +11,9 @@ import processing.core.PVector;
  */
 public class AllAtOnceEmitter extends Emitter {
 
-    PApplet m_p;
     PVector m_position;
     int     m_nofParticles;
     float   m_minVelocity, m_maxVelocity;
-    boolean m_isDead = false;
 
     LinkedList<Particle> m_particles = new LinkedList<Particle>();
 
@@ -29,8 +27,8 @@ public class AllAtOnceEmitter extends Emitter {
 
     public LinkedList<Particle> update (){
 
-        PVector size         = new PVector(18, 18);
-        PVector acceleration = new PVector(0.02F, 0.02F);
+        PVector size         = new PVector(20, 20);
+        PVector acceleration = new PVector(0, 0);
         PVector velocity     = new PVector();
 
         for (int i = 0; i < m_nofParticles; i++) {

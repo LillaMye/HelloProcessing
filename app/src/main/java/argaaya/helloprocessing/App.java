@@ -1,7 +1,5 @@
 package argaaya.helloprocessing;
 
-import java.util.LinkedList;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -20,8 +18,9 @@ public class App extends PApplet{
 
     public void setup () {
         blendMode(ADD);
-        m_image = loadImage("particle_wo_surroundings_small.png");
-        m_pMan  = new ParticleSystemManager(this);
+        m_image = loadImage("trans_sphere.png");
+        m_pMan  = ParticleSystemManager.getInstance();
+        m_pMan.providePapplet(this);
     }
 
     @Override
@@ -35,11 +34,10 @@ public class App extends PApplet{
 
         m_pSys = new ParticleSystem(this, m_image);
         m_pMan.addParticleSystem(m_pSys);
-
-        m_pSys.addModifier(new LifespanModifier(10));
-        m_pSys.addModifier(new SpeedModifier(-0.03F));
-        m_pSys.addModifier(new ColorModifier(0, 5, 3.5F, 5));
-        m_pSys.addEmitter(new AllAtOnceEmitter(this, 100, m_position, 0.1F, 5F));
+        m_pSys.addModifier(new AgeModifier(3));
+        m_pSys.addModifier(new DampingModifier(0.003F));
+        m_pSys.addModifier(new ColorModifier(this, color(255,255,255,255), color(255,127,0,255),color(255,0,0,0), 0.7F));
+        m_pSys.addEmitter(new AllAtOnceEmitter(this, 100, m_position, 0.1F, 3F));
     }
 
     public void draw() {
