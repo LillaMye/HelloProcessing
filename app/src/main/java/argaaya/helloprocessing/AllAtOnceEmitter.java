@@ -27,7 +27,7 @@ public class AllAtOnceEmitter extends Emitter {
 
     public LinkedList<Particle> update (){
 
-        PVector size         = new PVector(20, 20);
+        PVector size         = new PVector(15, 15);
         PVector acceleration = new PVector(0, 0);
         PVector velocity     = new PVector();
 

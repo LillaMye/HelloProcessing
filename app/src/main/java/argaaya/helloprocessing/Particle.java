@@ -39,7 +39,8 @@ public class Particle {
 
     public PVector getVelocity(){ return m_velocity;};
     public void    setVelocity(PVector velocity){m_velocity.set(velocity);}
-    public void    setAcceleration (PVector acceleration) {m_acceleration.set(acceleration);}
+    public void    setAcceleration(PVector acceleration) {m_acceleration.set(acceleration);}
+    public void    applyForce(PVector force){m_acceleration.add(force);}
 
     public void setTint (int color){
         m_tint = color;
