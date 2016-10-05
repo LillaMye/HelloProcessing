@@ -20,9 +20,9 @@ public class PerlinModifier extends Modifier {
 
         for (Particle p : particles){
             float t = (float)p.getAge() / (float)p.getMaxAge();
-            float n = m_p.noise(p.getVelocity().x, p.getVelocity().y, t);
+            float n = m_p.noise(p.getPosition().x, p.getPosition().y, t);
 
-            p.applyForce(new PVector(-p.getVelocity().x * n/10F, -p.getVelocity().y*n/10F));
+            p.applyForce(new PVector(-p.getVelocity().x * n/20F, -p.getVelocity().y*n/20F));
         }
     }
 

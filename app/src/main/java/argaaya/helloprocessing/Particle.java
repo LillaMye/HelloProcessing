@@ -22,13 +22,13 @@ public class Particle {
     int m_age;
     int m_tint = 0xFFFFFFFF;
 
-    public Particle(PApplet pApplet, PVector size, PVector position, PVector velocity, PVector acceleration) {
+    public Particle(PApplet pApplet, PVector size, PVector position, PVector velocity) {
         m_p = pApplet;
         m_position.set(position);
         m_velocity.set(velocity);
-        m_acceleration.set(acceleration);
         m_size.set(size);
         m_age = 0;
+        m_acceleration.set(0,0);
     }
 
     public int getAge() {return m_age;};
@@ -37,6 +37,7 @@ public class Particle {
         m_age += change;
     }
 
+    public PVector getPosition(){return m_position;}
     public PVector getVelocity(){ return m_velocity;};
     public void    setVelocity(PVector velocity){m_velocity.set(velocity);}
     public void    setAcceleration(PVector acceleration) {m_acceleration.set(acceleration);}
@@ -55,6 +56,7 @@ public class Particle {
     public void update() {
         m_position.add(m_velocity);
         m_velocity.add(m_acceleration);
+        m_acceleration.set(0,0);
     }
 
     public void draw() {

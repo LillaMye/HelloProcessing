@@ -13,8 +13,11 @@ public class Emitter {
 
     PApplet m_p;
     boolean m_isDead = false;
+    PVector m_position;
 
-    public boolean isDead (){return true;}
+    public boolean isDead () { return m_isDead; }
+
+    public void kill(){m_isDead = true;m_p.println("Emitter killed");}
 
     public LinkedList<Particle> update () {return null;}
 
@@ -28,4 +31,9 @@ public class Emitter {
 
         return velocity;
     }
+
+    public void updatePosition(PVector position){
+        m_position.set(position);
+    }
+
 }

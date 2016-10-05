@@ -11,7 +11,6 @@ import processing.core.PVector;
  */
 public class AllAtOnceEmitter extends Emitter {
 
-    PVector m_position;
     int     m_nofParticles;
     float   m_minVelocity, m_maxVelocity;
 
@@ -27,13 +26,12 @@ public class AllAtOnceEmitter extends Emitter {
 
     public LinkedList<Particle> update (){
 
-        PVector size         = new PVector(15, 15);
-        PVector acceleration = new PVector(0, 0);
+        PVector size         = new PVector(100, 100);
         PVector velocity     = new PVector();
 
         for (int i = 0; i < m_nofParticles; i++) {
             velocity.set(getRandomVelocity(m_minVelocity, m_maxVelocity));
-            m_particles.add(new Particle(m_p, size, m_position, velocity, acceleration));
+            m_particles.add(new Particle(m_p, size, m_position, velocity));
         }
 
         m_isDead = true;
