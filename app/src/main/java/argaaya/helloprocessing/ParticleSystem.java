@@ -65,6 +65,7 @@ public class ParticleSystem {
 
     public void draw() {
         m_p.texture(m_image);
+
         for (Particle P : m_particles){
             P.draw();
         }
