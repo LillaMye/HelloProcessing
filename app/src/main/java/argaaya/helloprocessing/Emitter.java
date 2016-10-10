@@ -17,7 +17,7 @@ public class Emitter {
 
     public boolean isDead () { return m_isDead; }
 
-    public void kill(){m_isDead = true;m_p.println("Emitter killed");}
+    public void kill(){m_isDead = true;}
 
     public LinkedList<Particle> update () {return null;}
 
@@ -35,5 +35,6 @@ public class Emitter {
     public void updatePosition(PVector position){
         m_position.set(position);
     }
+    public PVector getPosition(){return m_position;}
 
 }

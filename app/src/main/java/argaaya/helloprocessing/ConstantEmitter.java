@@ -28,7 +28,6 @@ public class ConstantEmitter extends Emitter {
         m_isDead = false;
     }
 
-
     public LinkedList<Particle> update (){
         PVector velocity     = new PVector();
         m_particles.clear();

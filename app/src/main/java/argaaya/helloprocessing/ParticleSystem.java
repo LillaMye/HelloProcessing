@@ -36,6 +36,17 @@ public class ParticleSystem {
 
     public void update () {
 
+        ListIterator<Emitter> emitterItr = m_emitters.listIterator();
+        while (emitterItr.hasNext()){
+            Emitter currEmitter = emitterItr.next();
+
+            m_particles.addAll(currEmitter.update());
+
+            if (currEmitter.isDead()){
+                emitterItr.remove();
+            }
+        }
+
         for (Modifier m : m_modifiers){
             m.apply(m_particles);
         }
@@ -50,24 +61,15 @@ public class ParticleSystem {
                 currParticle.update();
             }
         }
-
-        ListIterator<Emitter> emitterItr = m_emitters.listIterator();
-        while (emitterItr.hasNext()){
-            Emitter currEmitter = emitterItr.next();
-
-            m_particles.addAll(currEmitter.update());
-
-            if (currEmitter.isDead()){
-                emitterItr.remove();
-            }
-        }
     }
 
     public void draw() {
+        m_p.beginShape(m_p.QUADS);
         m_p.texture(m_image);
 
         for (Particle P : m_particles){
             P.draw();
         }
+        m_p.endShape();
     }
 }

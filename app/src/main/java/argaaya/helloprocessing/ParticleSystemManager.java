@@ -37,12 +37,9 @@ public final class ParticleSystemManager {
     }
 
     public void draw() {
-
-        m_p.beginShape(m_p.QUADS);
         for (ParticleSystem P : m_pSys) {
             P.draw();
         }
-        m_p.endShape();
     }
 }
 

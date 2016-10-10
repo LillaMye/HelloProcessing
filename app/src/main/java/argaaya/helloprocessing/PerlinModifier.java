@@ -11,9 +11,11 @@ import processing.core.PVector;
 public class PerlinModifier extends Modifier {
 
     PApplet m_p;
+    float   m_damping;
 
-    public PerlinModifier (PApplet pApplet) {
-      m_p = pApplet;
+    public PerlinModifier (PApplet pApplet, float damping) {
+      m_p       = pApplet;
+      m_damping = damping;
     }
 
     public void apply (LinkedList<Particle> particles){
@@ -22,7 +24,7 @@ public class PerlinModifier extends Modifier {
             float t = (float)p.getAge() / (float)p.getMaxAge();
             float n = m_p.noise(p.getPosition().x, p.getPosition().y, t);
 
-            p.applyForce(new PVector(-p.getVelocity().x * n/20F, -p.getVelocity().y*n/20F));
+            p.applyForce(new PVector(p.getVelocity().x * n * m_damping, p.getVelocity().y * n * m_damping));
         }
     }
 

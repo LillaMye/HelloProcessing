@@ -35,7 +35,6 @@ public class ColorModifier extends Modifier {
             } else {
                 c = m_p.lerpColor(m_mid, m_last, (t - m_midT)/(1 - m_midT));
             }
-
             p.setTint(c);
         }
     }
